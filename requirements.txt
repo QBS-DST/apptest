@@ -34,7 +34,7 @@ narwhals==1.22.0
 numpy==2.2.1
 ollama==0.4.6
 openai==0.28.0
-pytorch
+torch
 packaging==24.2
 pandas==2.2.3
 pdfminer.six==20231228
