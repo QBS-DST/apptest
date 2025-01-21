@@ -1,12 +1,7 @@
-# Core library for Streamlit
 streamlit==1.37.1
-
-# Required for image handling and saving
 Pillow==10.2.0
-
-# Other dependencies
-torch==2.3.1+cu118  # Replace with non-CUDA version if not using a GPU: torch==2.3.1
-torchvision==0.18.1+cu118
+torch==2.3.1
+torchvision==0.18.1
 transformers==4.47.1
 diffusers==0.32.1
 accelerate==1.2.1
