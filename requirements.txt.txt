@@ -1,0 +1,74 @@
+# Core dependencies
+numpy==1.26.3
+pandas==2.2.2
+scikit-learn==1.5.1
+matplotlib==3.9.2
+scipy==1.13.1
+
+# Deep learning and AI libraries
+torch==2.3.1+cu118
+torchvision==0.18.1+cu118
+transformers==4.47.1
+diffusers==0.32.1
+accelerate==1.2.1
+peft==0.13.2
+huggingface-hub==0.26.3
+datasets==2.20.0
+sentencepiece==0.2.0
+safetensors==0.4.5
+
+# Streamlit and related dependencies
+streamlit==1.37.1
+flask==3.0.3
+gradio-client==1.5.2
+
+# Visualization and plotting
+seaborn==0.13.2
+holoviews==1.19.1
+hvplot==0.11.0
+bokeh==3.6.0
+
+# PDF and document handling
+pdfminer-six==20231228
+pdfplumber==0.11.4
+pillow==10.2.0
+
+# NLP and text processing
+spacy==3.8.3
+spacy-legacy==3.0.12
+spacy-loggers==1.0.5
+srsly==2.5.0
+preshed==3.0.9
+tokenizers==0.21.0
+langcodes==3.5.0
+
+# Utilities
+pathlib==1.0.1
+typing-extensions==4.12.2
+timm==0.9.16
+simplejson==3.19.3
+pydantic==2.10.5
+pydantic-core==2.27.2
+xxhash==3.5.0
+shellingham==1.5.4
+websockets==14.1
+requests==2.32.3
+fsspec==2024.5.0
+urllib3==2.2.3
+typing-extensions==4.12.2
+
+# Image processing
+opencv-python==4.10.0.84
+imageio==2.33.1
+imagecodecs==2023.1.23
+
+# Development tools
+flake8==7.0.0
+black==24.8.0
+isort==5.13.2
+autopep8==2.0.4
+
+# Others
+pyarrow==16.1.0
+sqlalchemy==2.0.34
+pytest==7.4.4
