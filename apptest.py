@@ -25,7 +25,7 @@ def main():
     st.title("OmniGen Image Generator")
 
     # Model URL (replace with your direct download link)
-    MODEL_URL = "https://qbslearning-my.sharepoint.com/:f:/p/harsh_saha/EnZxk8UoIGhJj3pr4ZaCr3sBkX-G-G2HCWMC_o7nDJ5hAQ?&download=1"
+    MODEL_URL = "https://qbslearning-my.sharepoint.com/download.aspx?p=harsh_saha/Emlm_8rxb-dAgXyyw81xCp8BpoVXpsISPemcU82tQY3dtw?e=v73T96"
     MODEL_PATH = "models/OmniGen-v1.safetensors"
 
     # Ensure the directory exists
