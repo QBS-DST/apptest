@@ -30,7 +30,7 @@ def main():
     model_name = st.sidebar.text_input("Enter model name:", "Shitao/OmniGen-v1")
 
     # OneDrive direct download link for the model
-    MODEL_URL = "https://qbslearning-my.sharepoint.com/download.aspx?p=harsh_saha/Emlm_8rxb-dAgXyyw81xCp8BpoVXpsISPemcU82tQY3dtw?e=v73T96"
+    MODEL_URL = "https://qbslearning-my.sharepoint.com/:f:/p/harsh_saha/EnZxk8UoIGhJj3pr4ZaCr3sBkX-G-G2HCWMC_o7nDJ5hAQ?e=vQcTFb"
     MODEL_PATH = "models/model.safetensors"
 
     # Ensure the directory exists
