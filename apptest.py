@@ -3,7 +3,7 @@ from OmniGen import OmniGenPipeline
 from PIL import Image
 
 # Set paths for the model directory and model file
-MODEL_DIR = "C:\Users\ai.team\Desktop\testing\apptest\models\"
+MODEL_DIR = "C:/Users/ai.team/Desktop/testing/apptest/models/"
 MODEL_NAME = "OmniGen-v1.safetensors"
 
 @st.cache_resource
