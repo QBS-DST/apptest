@@ -29,7 +29,7 @@ def main():
     st.sidebar.header("Model Configuration")
     model_url = st.sidebar.text_input("Model File URL:", "https://qbslearning-my.sharepoint.com/:u:/p/harsh_saha/ETfBGQdsAv9DrnLuZqe-jawB6y2IBShEMibgYeyHdeSBOw?e=b8NBPr")
     diffusion_model_url = st.sidebar.text_input("Diffusion Model File URL:", "https://qbslearning-my.sharepoint.com/:u:/p/harsh_saha/EWQhiNGP8wRAoCDE5driXbYB-YAZO2XtJwmT4oP0ZqNGXA?e=VdKO97")
-    config_url = st.sidebar.text_input("Config File URL:", "https://qbslearning-my.sharepoint.com/:u:/p/harsh_saha/ER6-cOlnJ6ZFijrOisQcrEQBycaqXSb2BJDHMjtKRUmIDw?e=fiphSS")
+    config_url = st.sidebar.text_input("Config File URL:", "https://qbslearning-my.sharepoint.com/:u:/p/harsh_saha/ER6-cOlnJ6ZFijrOisQcrEQBycaqXSb2BJDHMjtKRUmIDw?e=Zbihe7")
     tokenizer_config_url = st.sidebar.text_input("Tokenizer Config URL:", "https://qbslearning-my.sharepoint.com/:u:/p/harsh_saha/EUqoLkPLthNFsrWY11Yp8XgBIIuHZjXyTaxUwIRkZpYo_g?e=E3cebp")
     special_tokens_map_url = st.sidebar.text_input("Special Tokens Map URL:", "https://qbslearning-my.sharepoint.com/:u:/p/harsh_saha/EalBk_vWjaJMiJ6-JW2BPdQBaet82VCceBG1PrY6IXqJZQ?e=ytGhqu")
 
