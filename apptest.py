@@ -2,25 +2,26 @@ import streamlit as st
 from OmniGen import OmniGenPipeline
 from PIL import Image
 
+# Set paths for the model directory and model file
+MODEL_DIR = "models/"
+MODEL_NAME = "OmniGen-v1.safetensors"
+
+@st.cache_resource
+def load_pipeline(model_dir, model_name):
+    """
+    Load the OmniGen pipeline from the local directory.
+    """
+    return OmniGenPipeline.from_pretrained(
+        pretrained_model_name_or_path=model_dir,
+        weights_path=f"{model_dir}{model_name}"
+    )
+
 def main():
     # Application Title
     st.title("OmniGen Image Generator")
 
-    # Sidebar for Model Configuration
-    st.sidebar.header("Model Configuration")
-    model_name = st.sidebar.text_input("Enter model name:", "Shitao/OmniGen-v1")
-
     # Load the pipeline
-    @st.cache_resource
-    def load_pipeline(model_name):
-        """
-        Load the OmniGen pipeline for image generation.
-        Uses Streamlit's caching to avoid reloading unnecessarily.
-        """
-        return OmniGenPipeline.from_pretrained(model_name)
-
-    # Initialize the pipeline
-    pipe = load_pipeline(model_name)
+    pipe = load_pipeline(MODEL_DIR, MODEL_NAME)
 
     # User Input for Image Generation
     st.header("Image Generation")
