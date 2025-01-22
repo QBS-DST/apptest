@@ -1,0 +1,2 @@
+[server]
+server.maxMessageSize = 1000
