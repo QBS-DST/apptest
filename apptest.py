@@ -1,7 +1,27 @@
+import os
+import requests
 import streamlit as st
 from OmniGen import OmniGenPipeline
-from PIL import Image
-import os
+
+
+def download_model(url, output_path):
+    """Download the model file from a remote URL."""
+    try:
+        if not os.path.exists(output_path):
+            st.write("Downloading model...")
+            response = requests.get(url, stream=True)
+            response.raise_for_status()  # Ensure the request was successful
+            with open(output_path, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+            st.success(f"Model downloaded to {output_path}")
+        else:
+            st.write(f"Model already exists at {output_path}")
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error downloading the model: {e}")
+        raise e
+
 
 def main():
     st.title("OmniGen Image Generator")
@@ -10,17 +30,29 @@ def main():
     st.sidebar.header("Model Configuration")
     model_name = st.sidebar.text_input("Enter model name:", "Shitao/OmniGen-v1")
 
+    # Fetch the model URL from Streamlit Secrets
+    MODEL_URL = st.secrets["model_url"]
+    MODEL_PATH = "models/OmniGen-v1.safetensors"
+
+    # Ensure the directory exists
+    os.makedirs("models", exist_ok=True)
+
+    # Download the model
+    download_model(MODEL_URL, MODEL_PATH)
+
     # Load the pipeline
     @st.cache_resource
-    def load_pipeline(model_name):
-        return OmniGenPipeline.from_pretrained(model_name)
+    def load_pipeline(model_path):
+        return OmniGenPipeline.from_pretrained(model_path)
 
-    pipe = load_pipeline(model_name)
+    pipe = load_pipeline(MODEL_PATH)
 
     # User input for prompt and parameters
     st.header("Image Generation")
-    prompt = st.text_area("Enter your prompt:", 
-                          "A highly realistic first-person perspective of someone recording themselves on a steep, rocky mountain slope. The scene captures the rugged texture of the sedimentary rocks, scattered with small debris and fossils, with one leg visibly slipping down the slope. The background includes a dramatic valley view, with sunlight illuminating sections of the terrain while other areas remain in shadow. Sparse greenery is present along the edges of the rocks, and the perspective conveys the tension and precariousness of the moment, emphasizing the danger of navigating this rugged mountain environment.")
+    prompt = st.text_area(
+        "Enter your prompt:",
+        "A highly realistic first-person perspective of someone recording themselves on a steep, rocky mountain slope.",
+    )
 
     height = st.slider("Image Height:", min_value=256, max_value=2048, value=1024, step=64)
     width = st.slider("Image Width:", min_value=256, max_value=2048, value=1920, step=64)
@@ -46,12 +78,13 @@ def main():
             images[0].save(save_path)
             st.success(f"Image saved as {save_path}")
             with open(save_path, "rb") as file:
-                btn = st.download_button(
+                st.download_button(
                     label="Download Image",
                     data=file,
                     file_name="generated_image.png",
                     mime="image/png"
                 )
+
 
 if __name__ == "__main__":
     main()
