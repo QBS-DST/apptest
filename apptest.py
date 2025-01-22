@@ -3,36 +3,35 @@ import requests
 from OmniGen import OmniGenPipeline
 
 def download_model(url, output_path):
-    """Download the model file from OneDrive."""
-    if not os.path.exists(output_path):
-        print("Downloading model...")
-        response = requests.get(url, stream=True)
-        response.raise_for_status()  # Ensure the request was successful
-        with open(output_path, "wb") as f:
-            for chunk in response.iter_content(chunk_size=8192):
-                if chunk:  # Skip keep-alive chunks
-                    f.write(chunk)
-        print(f"Model downloaded to {output_path}")
-    else:
-        print(f"Model already exists at {output_path}")
+    """Download the model file from SharePoint."""
+    try:
+        if not os.path.exists(output_path):
+            print("Downloading model...")
+            response = requests.get(url, stream=True)
+            response.raise_for_status()  # Ensure the request was successful
+            with open(output_path, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+            print(f"Model downloaded to {output_path}")
+        else:
+            print(f"Model already exists at {output_path}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error downloading the model: {e}")
+        raise e
 
 def main():
-    # Streamlit app setup
     import streamlit as st
     st.title("OmniGen Image Generator")
 
-    # Sidebar for configuration
-    st.sidebar.header("Model Configuration")
-    model_name = st.sidebar.text_input("Enter model name:", "Shitao/OmniGen-v1")
-
-    # Model download URL from OneDrive (update with your direct link)
-    MODEL_URL = "https://qbslearning-my.sharepoint.com/personal/p/harsh_saha/EnZxk8UoIGhJj3pr4ZaCr3sBffIJQvVfv3iDwlKRbLRCDQ?e=gYcDq7/download"
+    # Model URL (replace with your direct download link)
+    MODEL_URL = "https://qbslearning-my.sharepoint.com/:u:/g/personal/harsh_saha/qbBcsK-mD3BDlX2oBv5kA1XBZ8vPtG1PtF7JZzVcjBY123&download=1"
     MODEL_PATH = "models/OmniGen-v1.safetensors"
 
     # Ensure the directory exists
     os.makedirs("models", exist_ok=True)
 
-    # Download the model if not already present
+    # Download the model
     download_model(MODEL_URL, MODEL_PATH)
 
     # Load the pipeline
@@ -42,7 +41,7 @@ def main():
 
     pipe = load_pipeline(MODEL_PATH)
 
-    # User input for prompt
+    # User input for prompt and parameters
     st.header("Image Generation")
     prompt = st.text_area("Enter your prompt:", "A beautiful landscape.")
     if st.button("Generate Image"):
