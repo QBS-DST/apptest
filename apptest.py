@@ -12,17 +12,15 @@ def main():
 
     # Load the pipeline
     @st.cache_resource
-    def load_pipeline(model_name, model_dir):
-        return OmniGenPipeline.from_pretrained(model_name, model_path=model_dir)
+    def load_pipeline(model_name):
+        return OmniGenPipeline.from_pretrained(model_name)
 
-    # Set the path to the directory containing all model files
-    model_dir = "models/"  # Directory containing .safetensors and other files
-    pipe = load_pipeline(model_name, model_dir=model_dir)
+    pipe = load_pipeline(model_name)
 
     # User input for prompt and parameters
     st.header("Image Generation")
     prompt = st.text_area("Enter your prompt:", 
-                          "A highly realistic first-person perspective of someone recording themselves on a steep, rocky mountain slope.")
+                          "A highly realistic first-person perspective of someone recording themselves on a steep, rocky mountain slope. The scene captures the rugged texture of the sedimentary rocks, scattered with small debris and fossils, with one leg visibly slipping down the slope. The background includes a dramatic valley view, with sunlight illuminating sections of the terrain while other areas remain in shadow. Sparse greenery is present along the edges of the rocks, and the perspective conveys the tension and precariousness of the moment, emphasizing the danger of navigating this rugged mountain environment.")
 
     height = st.slider("Image Height:", min_value=256, max_value=2048, value=1024, step=64)
     width = st.slider("Image Width:", min_value=256, max_value=2048, value=1920, step=64)
