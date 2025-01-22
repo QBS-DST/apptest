@@ -8,9 +8,7 @@ def main():
 
     # Check Streamlit Server Configurations (Optional Debugging Step)
     max_message_size = st.config.get_option("server.maxMessageSize")
-    file_watcher_timeout = st.config.get_option("server.fileWatcherTimeout")
     st.sidebar.write(f"Server Max Message Size: {max_message_size} MB")
-    st.sidebar.write(f"File Watcher Timeout: {file_watcher_timeout} seconds")
 
     # Sidebar for Model Configuration
     st.sidebar.header("Model Configuration")
