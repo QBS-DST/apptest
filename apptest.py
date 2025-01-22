@@ -32,7 +32,7 @@ def main():
 
     # Fetch the model URL from Streamlit Secrets
     MODEL_URL = st.secrets["model_url"]
-    MODEL_PATH = "models/OmniGen-v1.safetensors"
+    MODEL_PATH = "models/config.json"
 
     # Ensure the directory exists
     os.makedirs("models", exist_ok=True)
