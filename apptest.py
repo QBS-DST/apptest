@@ -13,7 +13,7 @@ def main():
     # Load the pipeline
     @st.cache_resource
     def load_pipeline(model_name):
-        model_path = "C:\Users\ai.team\Desktop\testing\apptest\models"  # Path to the directory containing the safetensors files
+        model_path = r"C:\Users\ai.team\Desktop\testing\apptest\models"  # Path to the directory containing the safetensors files
         return OmniGenPipeline.from_pretrained(model_path, local_files_only=True)
 
     pipe = load_pipeline(model_name)
