@@ -2,26 +2,39 @@ import streamlit as st
 from OmniGen import OmniGenPipeline
 from PIL import Image
 import os
+import zipfile
 
 def main():
     st.title("OmniGen Image Generator")
 
     # Sidebar for model loading
     st.sidebar.header("Model Configuration")
-    model_name = st.sidebar.text_input("Enter model name:", "Shitao/OmniGen-v1")
+    model_name = st.sidebar.text_input("Enter model name (for reference):", "Shitao/OmniGen-v1")
+
+    # Define the path to the models directory or zip file
+    zip_file_path = "models.zip"
+    model_dir = "models"
+
+    # Extract the models.zip if the directory doesn't exist
+    if not os.path.exists(model_dir):
+        with st.spinner(f"Extracting {zip_file_path}..."):
+            with zipfile.ZipFile(zip_file_path, "r") as zip_ref:
+                zip_ref.extractall("./")
+            st.success(f"Extracted {zip_file_path} to {model_dir}.")
 
     # Load the pipeline
     @st.cache_resource
-    def load_pipeline(model_name):
-        model_path = r"C:\Users\ai.team\Desktop\testing\apptest\models"  # Path to the directory containing the safetensors files
+    def load_pipeline(model_path):
         return OmniGenPipeline.from_pretrained(model_path, local_files_only=True)
 
-    pipe = load_pipeline(model_name)
+    pipe = load_pipeline(model_dir)
 
     # User input for prompt and parameters
     st.header("Image Generation")
-    prompt = st.text_area("Enter your prompt:", 
-                          "A highly realistic first-person perspective of someone recording themselves on a steep, rocky mountain slope. The scene captures the rugged texture of the sedimentary rocks, scattered with small debris and fossils, with one leg visibly slipping down the slope. The background includes a dramatic valley view, with sunlight illuminating sections of the terrain while other areas remain in shadow. Sparse greenery is present along the edges of the rocks, and the perspective conveys the tension and precariousness of the moment, emphasizing the danger of navigating this rugged mountain environment.")
+    prompt = st.text_area(
+        "Enter your prompt:", 
+        "A highly realistic first-person perspective of someone recording themselves on a steep, rocky mountain slope. The scene captures the rugged texture of the sedimentary rocks, scattered with small debris and fossils, with one leg visibly slipping down the slope. The background includes a dramatic valley view, with sunlight illuminating sections of the terrain while other areas remain in shadow. Sparse greenery is present along the edges of the rocks, and the perspective conveys the tension and precariousness of the moment, emphasizing the danger of navigating this rugged mountain environment."
+    )
 
     height = st.slider("Image Height:", min_value=256, max_value=2048, value=1024, step=64)
     width = st.slider("Image Width:", min_value=256, max_value=2048, value=1920, step=64)
