@@ -1,7 +1,0 @@
-[server]
-headless = true
-enableCORS = false
-port = 8501
-server.maxMessageSize = 1000  # Allow messages up to 1 GB
-
-
